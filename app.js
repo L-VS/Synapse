@@ -1,22 +1,6 @@
 // Configuration
-const PROXY_URL = "/api/hf-proxy"; // Utilise le proxy intégré à Vercel
-
-async function queryOrion(prompt) {
-  try {
-    const response = await fetch(PROXY_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-    
-    const data = await response.json();
-    return data.choices?.[0]?.message?.content || "No response";
-  } catch (error) {
-    return "Service unavailable. Please try later.";
-  }
-}
+const PROXY_URL = "/hf-proxy"; // Chemin relatif vers votre proxy Vercel
+const TYPING_DELAY = 50; // Délai entre chaque caractère pour l'effet "typing"
 // Éléments DOM
 const chatMessages = document.getElementById('chat-messages');
 const userInput = document.getElementById('user-input');
