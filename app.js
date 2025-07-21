@@ -1,8 +1,22 @@
 // Configuration
-const API_URL = "https://router.huggingface.co/v1/chat/completions";
-const HF_TOKEN = "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"; // À remplacer par process.env.HF_TOKEN en production
-const MODEL = "HuggingFaceTB/SmolLM3-3B:hf-inference";
+const PROXY_URL = "/api/hf-proxy"; // Utilise le proxy intégré à Vercel
 
+async function queryOrion(prompt) {
+  try {
+    const response = await fetch(PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    
+    const data = await response.json();
+    return data.choices?.[0]?.message?.content || "No response";
+  } catch (error) {
+    return "Service unavailable. Please try later.";
+  }
+}
 // Éléments DOM
 const chatMessages = document.getElementById('chat-messages');
 const userInput = document.getElementById('user-input');
