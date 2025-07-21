@@ -1,6 +1,7 @@
 // Configuration
 const PROXY_URL = "/hf-proxy"; // Chemin relatif vers votre proxy Vercel
 const TYPING_DELAY = 50; // Délai entre chaque caractère pour l'effet "typing"
+
 // Éléments DOM
 const chatMessages = document.getElementById('chat-messages');
 const userInput = document.getElementById('user-input');
